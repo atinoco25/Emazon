@@ -22,10 +22,10 @@ session_start();
     <div class="container-fluid">
         <div class="row">
             <div class="col"> <h1>Emazon</h1> </div>
-            <div class="col">
+            <div class="col" style="text-align:center;">
             	<a href="search.php" class="btn btn-dark" role="button">Clear Search</a>
             </div>
-            <div class="col">
+            <div class="col" style="text-align:right;">
                 <?php 
                 if(isset($_SESSION["user"])){
                     echo '<a href="cart.php" class="btn btn-dark" role="button">Cart</a>';

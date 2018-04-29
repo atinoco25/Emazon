@@ -21,23 +21,37 @@ session_start();
     <div class="container-fluid">
         <div class="row">
             <div class="col"> <h1>Emazon</h1> </div>
-            <div class="col">
+            <div class="col" style="text-align:center;">
             	<a href="search.php" class="btn btn-dark" role="button">Search</a>
             </div>
-            <div class="col">
+            <div class="col" style="text-align:right;">
             	 <a href="index.php" class="btn btn-dark" role="button">Home</a>
+            	 <a href="register.php" class="btn btn-dark" role="button">Register</a>
             </div>
         </div>
     </div>
 </div>
 <!-- HEADER ENDS -->
-
-<h3>Login</h3>
+<br>
+<br>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-4"></div>
+<div class="col-sm-4">
+<div class="containerForm">
+<h2>Login</h2>
+<br>
 <div class="form">
 	<form action="controller.php" method="POST">
-		<p> User ID: <input type="text" name="ID"></p>
-		<p> Password: <input type="password" name="password"></p>
-	<button type="submit" name="login" value="Login">Login</button><br><br>
+  	<div class="form-group">
+    <label for="username">Username:</label>
+    <input type="text" class="form-control" placeholder="Enter username" id="username" name="username">
+  	</div>
+  	<div class="form-group">
+    <label for="pwd">Password:</label>
+    <input type="password" class="form-control" placeholder="Enter password" id="pwd" id="pwd">
+ 	</div>
+  	<button type="submit" class="btn btn-primary" name="register" value="Registe">Submit</button>
 	</form>
 
 	<?php
@@ -47,6 +61,9 @@ session_start();
     
 	?>
 </div>
-
+</div>
+</div>
+</div>
+</div>
 </body>
 </html>

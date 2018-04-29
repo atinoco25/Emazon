@@ -20,10 +20,10 @@ session_start();
     <div class="container-fluid">
         <div class="row">
             <div class="col"> <h1>Emazon</h1> </div>
-            <div class="col">
+            <div class="col" style="text-align:center;">
             	<a href="search.php" class="btn btn-dark" role="button">Search</a>
             </div>
-            <div class="col">
+            <div class="col" style="text-align:right;">
             <?php 
             if(isset($_SESSION["user"])){
                 echo '<a href="cart.php" class="btn btn-dark" role="button">Cart</a>';
@@ -41,49 +41,59 @@ session_start();
     </div>
 </div>
 <!-- HEADER ENDS -->
-<div class="body">
-    <!-- CAROUSEL CODE ENDS-->
-    <div id="demo" class="carousel slide" style="width:50%;" data-ride="carousel">
-    
-      <!-- Indicators -->
-      <ul class="carousel-indicators">
-        <li data-target="#demo" data-slide-to="0" class="active"></li>
-        <li data-target="#demo" data-slide-to="1"></li>
-        <li data-target="#demo" data-slide-to="2"></li>
-      </ul>
-    
-      <!-- The slideshow -->
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="img/dailySpecials.jpg" width="800px" height="300px">
-          <div class="carousel-caption">
-      		</div>
-        </div>
-        <div class="carousel-item">
-          <img src="img/hammer.jpg" width="800px" height="300px" alt="Chicago">
-          <div class="carousel-caption">
-              <h3>Hammer</h3>
-              <p>Get a hammer for only $6.99!</p>
+<br>
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-8">
+            
+        <!-- CAROUSEL CODE STARTS-->
+        <div id="demo" class="carousel slide" style="width:50%;" data-ride="carousel">
+        
+          <!-- Indicators -->
+          <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
+          </ul>
+        
+          <!-- The slideshow -->
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="img/dailySpecials.jpg" width="500px" height="300px">
+              <div class="carousel-caption">
+          		</div>
+            </div>
+            <div class="carousel-item">
+              <img src="img/hammer.jpg" width="500px" height="300px" alt="Chicago">
+              <div class="carousel-caption">
+                  <h3>Hammer</h3>
+                  <p>Get a hammer for only $6.99!</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="img/chipsSnacks.jpg" width="500px" height="300px">
+              <div class="carousel-caption">
+                  <h3>Chips!</h3>
+                  <p>Get all these chips for only $6.99!</p>
+              </div>
+            </div>
           </div>
+        
+          <!-- Left and right controls -->
+          <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </a>
+          <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </a>
         </div>
-        <div class="carousel-item">
-          <img src="img/chipsSnacks.jpg" width="800px" height="300px">
-          <div class="carousel-caption">
-              <h3>Chips!</h3>
-              <p>Get all these chips for only $6.99!</p>
-          </div>
+        <!-- CAROUSEL CODE ENDS -->
         </div>
-      </div>
-    
-      <!-- Left and right controls -->
-      <a class="carousel-control-prev" href="#demo" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </a>
-      <a class="carousel-control-next" href="#demo" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </a>
     </div>
-    <!-- CAROUSEL CODE ENDS -->
+    
+    <div class="row"></div>
 </div>
 </body>
 </html>
