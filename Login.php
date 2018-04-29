@@ -48,19 +48,19 @@ session_start();
 	<form action="controller.php" method="POST">
   	<div class="form-group">
     <label for="username">Username:</label>
-    <input type="text" class="form-control" placeholder="Enter username" id="username" name="username">
+    <input type="text" class="form-control" placeholder="Enter username" name="username">
   	</div>
   	<div class="form-group">
     <label for="pwd">Password:</label>
-    <input type="password" class="form-control" placeholder="Enter password" id="pwd" id="pwd">
+    <input type="password" class="form-control" placeholder="Enter password" name="password">
  	</div>
-  	<button type="submit" class="btn btn-primary" name="register" value="Registe">Submit</button>
+  	<button type="submit" class="btn btn-primary" name="login" value="Login">Login</button>
 	</form>
 
 	<?php
 	
-	if( isset(  $_SESSION['loginFailed']))
-	    echo   $_SESSION['loginFailed'];   
+	if( isset(  $_SESSION['LoginFailed']))
+	    echo   $_SESSION['LoginFailed'];   
     
 	?>
 </div>

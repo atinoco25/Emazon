@@ -47,21 +47,21 @@ session_start();
 <br>
 <div class="form">
 	<form action="controller.php" method="POST">
-  	<div class="form-group">
-    <label for="username">Username:</label>
-    <input type="text" class="form-control" placeholder="Enter username" id="username" name="username">
-  	</div>
-  	<div class="form-group">
-    <label for="pwd">Password:</label>
-    <input type="password" class="form-control" placeholder="Enter password" id="pwd" id="pwd">
- 	</div>
-  	<button type="submit" class="btn btn-primary" name="register" value="Registe">Submit</button>
+      	<div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" class="form-control" placeholder="Enter username" name="newUsername">
+      	</div>
+      	<div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" placeholder="Enter password" name="newPassword">
+     	</div>
+      		<button type="submit" class="btn btn-primary" name="register" value="Register">Submit</button>
 	</form>
 
 	<?php
 	
-	if( isset(  $_SESSION['registerFailed']))
-	    echo   $_SESSION['registerFailed']; 
+	if( isset(  $_SESSION['RegisterFailed']))
+	    echo   $_SESSION['RegisterFailed']; 
     
 	?>
 </div>

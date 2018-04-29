@@ -31,7 +31,7 @@ session_start();
             if(isset($_SESSION["user"])){
                 echo '<a href="cart.php" class="btn btn-dark" role="button">Cart</a>';
                 echo '&nbsp';
-                echo '<a class="btn btn-dark" role="button">Logout</a>';
+                echo '<a href="logout.php" class="btn btn-dark" role="button">Logout</a>';
             }
             else{
                 echo '<a href="login.php" class="btn btn-dark" role="button">Login</a>';
