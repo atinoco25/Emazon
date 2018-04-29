@@ -21,12 +21,15 @@ session_start();
     <div class="container-fluid">
         <div class="row">
             <div class="col"> <h1>Emazon</h1> </div>
-            <div class="col" style="text-align:center;">
-            	<a href="search.php" class="btn btn-dark" role="button">Search</a>
+            <div class="col" style="text-align:center;margin:auto;">
+            	<form action="search.php" method="POST">
+            		<input type="text" name="toSearch" placeholder="Enter product">
+            		<button type="submit" class="btn btn-dark" name="search" value="Search">Search</button>
+            	</form>
             </div>
-            <div class="col" style="text-align:right;">
-            	 <a href="index.php" class="btn btn-dark" role="button">Home</a>
+            <div class="col" style="text-align:right;margin:auto;">
             	 <a href="register.php" class="btn btn-dark" role="button">Register</a>
+            	 <a href="index.php" class="btn btn-dark" role="button">Home</a>
             </div>
         </div>
     </div>
@@ -65,5 +68,9 @@ session_start();
 </div>
 </div>
 </div>
+
+<footer class="myFooter">
+<p>Emazon @Copyright 2018 By Alexis Tinoco and Chun Wu</p>
+</footer>
 </body>
 </html>

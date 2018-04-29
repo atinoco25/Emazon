@@ -20,10 +20,13 @@ session_start();
     <div class="container-fluid">
         <div class="row">
             <div class="col"> <h1>Emazon</h1> </div>
-            <div class="col" style="text-align:center;">
-            	<a href="search.php" class="btn btn-dark" role="button">Search</a>
+            <div class="col" style="text-align:center;margin:auto;">
+            	<form action="search.php" method="POST">
+            		<input type="text" name="toSearch" placeholder="Enter product">
+            		<button type="submit" class="btn btn-dark" name="search" value="Search">Search</button>
+            	</form>
             </div>
-            <div class="col" style="text-align:right;">
+            <div class="col" style="text-align:right;margin:auto;">
             <?php 
             if(isset($_SESSION["user"])){
                 echo '<a href="cart.php" class="btn btn-dark" role="button">Cart</a>';
@@ -36,12 +39,17 @@ session_start();
                 echo '<a href="register.php" class="btn btn-dark" role="button">Register</a>';
             }
             ?>
+            <a href="index.php" class="btn btn-dark" role="button">Home</a>
             </div>
         </div>
     </div>
 </div>
 <!-- HEADER ENDS -->
 <br>
+<div class="emazonWelcome">
+<p>Welcome to Emazon!</p>
+</div>
+
 <br>
 <div class="container-fluid">
     <div class="row">
@@ -95,5 +103,10 @@ session_start();
     
     <div class="row"></div>
 </div>
+
+
+<footer class="myFooter">
+<p>Emazon @Copyright 2018 By Alexis Tinoco and Chun Wu</p>
+</footer>
 </body>
 </html>

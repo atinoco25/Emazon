@@ -22,10 +22,10 @@ session_start();
     <div class="container-fluid">
         <div class="row">
             <div class="col"> <h1>Emazon</h1> </div>
-            <div class="col" style="text-align:center;">
+            <div class="col" style="text-align:center;margin:auto;">
             	<a href="search.php" class="btn btn-dark" role="button">Clear Search</a>
             </div>
-            <div class="col" style="text-align:right;">
+            <div class="col" style="text-align:right;margin:auto;">
                 <?php 
                 if(isset($_SESSION["user"])){
                     echo '<a href="cart.php" class="btn btn-dark" role="button">Cart</a>';
@@ -46,5 +46,8 @@ session_start();
 <!-- HEADER ENDS -->
 
 
+<footer class="myFooter">
+<p>Emazon @Copyright 2018 By Alexis Tinoco and Chun Wu</p>
+</footer>
 </body>
 </html>
