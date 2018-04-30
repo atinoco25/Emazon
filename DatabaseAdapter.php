@@ -207,6 +207,5 @@ class DatabaseAdaptor {
 
 $theDBA = new DatabaseAdaptor();
 
-$theDBA->addToCart('feg', 10001, 99);
 
 ?>
