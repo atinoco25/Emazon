@@ -21,7 +21,7 @@ session_start();
 <div class="header">
     <div class="container-fluid">
         <div class="row">
-            <div class="col"> <h1>Emazon</h1> </div>
+            <div class="col"> <a class="logo" href="index.php">Emazon</a> </div>
             <div class="col" style="text-align:center;margin:auto;">
             	<a href="search.php" class="btn btn-dark" role="button">Clear Search</a>
             </div>
@@ -45,9 +45,30 @@ session_start();
 </div>
 <!-- HEADER ENDS -->
 
+<div id="toChange"></div>
 
 <footer class="myFooter">
 <p>Emazon @Copyright 2018 By Alexis Tinoco and Chun Wu</p>
 </footer>
+
+<script type="text/javascript">
+search();
+
+function search(){
+	var elementToChange = document.getElementById("toChange");
+	var ajax = new XMLHttpRequest();
+	var textToSearch = <?php echo json_encode($_POST["toSearch"]); ?>;
+	
+	ajax.open("GET", "Controller.php?search=" + textToSearch, true);
+
+	ajax.send();
+	ajax.onreadystatechange = function() {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			var products = JSON.parse(ajax.responseText);
+			elementToChange.innerHTML = products;
+		}
+	}; // End anonymous function
+}
+</script>
 </body>
 </html>

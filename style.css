@@ -23,6 +23,7 @@ body{
 	background-color: lightgrey;
 	border-radius:20px;
 	box-shadow: 10px 10px 5px grey;
+	padding:50px;
 }
 .emazonWelcome{
 	text-align: center;
@@ -30,7 +31,9 @@ body{
 	font-size: 50px;
 	font-weight: bold;
 }
-
+.product{
+	border: solid;
+}
 .myFooter{
 	position: fixed;
 	bottom: 0;
@@ -39,4 +42,19 @@ body{
 	background-color: black;
 	color: white;
 	box-shadow: 0px -10px 5px grey;
+}
+.logo{
+	font-size: 40px;
+	background-color: black;
+	width: 150px;
+	text-align: center;
+	color: yellow;
+	border-radius: 15px;
+	font-weight: italic;
+	font-family: Baskerville;
+	text-shadow: 3px 3px gray;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top:5px;
+	padding-bottom:5px;
 }

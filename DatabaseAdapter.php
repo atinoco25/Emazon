@@ -19,7 +19,18 @@ class DatabaseAdaptor {
     }
     
     //searchByName
-    
+    public function search($toSearch){
+        $array = explode(" ", $toSearch);
+        $prepareStatement = "select * from products where name like '%" . $array[0] . "%' or description like '%" . $array[0] . "%' ";
+        for($i = 1; $i < count($array); $i++){
+            $prepareStatement .= "or name like '%" . $array[$i] . "%' or description like '%" . $array[$i] . "%' ";
+        }
+        $stmt = $this->DB->prepare($prepareStatement);
+        $stmt->execute();
+        $arr = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+        return $arr;
+    }
     //searchByPrice
     
     //searchByCatagory
@@ -81,4 +92,3 @@ class DatabaseAdaptor {
 }
 
 $theDBA = new DatabaseAdaptor();
-
