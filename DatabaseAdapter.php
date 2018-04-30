@@ -2,6 +2,23 @@
 
 class DatabaseAdaptor {
     
+    /*
+     *  LIST OF FUNCTIONS:
+     * 
+     *      searchByString($str)
+     *      searchByPrice($min, $max)
+     *      searchByCategory($category)
+     *      getCart($username)
+     *      addToCart($username, $product_id, $quantity)
+     *      getOrder($username)
+     *      checkout($username) //Calls removeCart()
+     *      removeCart($username)
+     *      getNewCart()
+     *      addUser()
+     *      verifyCredentials($userName, $psw)
+     * 
+     */
+    
     private $DB;
     
     public function __construct() {
@@ -19,7 +36,7 @@ class DatabaseAdaptor {
     }
     
     //searchByName
-    public function search($toSearch){
+    public function searchByString($toSearch){
         $array = explode(" ", $toSearch);
         $prepareStatement = "select * from products where name like '%" . $array[0] . "%' or description like '%" . $array[0] . "%' ";
         for($i = 1; $i < count($array); $i++){
@@ -32,17 +49,114 @@ class DatabaseAdaptor {
         return $arr;
     }
     //searchByPrice
+    public function searchByPrice($min, $max){
+        $prepareStatement = "select * from products where price >= $min AND price <= $max";
+        $stmt = $this->DB->prepare($prepareStatement);
+        $stmt->execute();
+        $arr = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+        return $arr;
+    }
     
     //searchByCatagory
+    public function searchByCategory($category){
+        $prepareStatement = "select * from products where category like '$category'";
+        $stmt = $this->DB->prepare($prepareStatement);
+        $stmt->execute();
+        $arr = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+        return $arr;
+    }
     
     //getCart
+    public function getCart($username){
+        $prepareStatement1 = "select * from users where username like '$username'";
+        $stmt = $this->DB->prepare($prepareStatement1);
+        $stmt->execute();
+        $arr = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+        $prepareStatement2 = "select * from carts where id = {$arr[0]['cart_id']}";
+        $stmt = $this->DB->prepare($prepareStatement2);
+        $stmt->execute();
+        $cart = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+        return $cart;
+    }
+    
+    public function addToCart($username, $product_id, $quan){
+        $prepareStatement1 = "select * from users where username like '$username'";
+        $stmt = $this->DB->prepare($prepareStatement1);
+        $stmt->execute();
+        $user = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+        $prepareStatement2 = "select * from products where id = $product_id";
+        $stmt = $this->DB->prepare($prepareStatement2);
+        $stmt->execute();
+        $item = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+        $prepareStatement3 = "insert into carts(                   id,        product_id, quantity)"
+                                       ."values({$user[0]['cart_id']},  {$item[0]['id']},    $quan)";
+        $stmt = $this->DB->prepare($prepareStatement3);
+        $stmt->execute();
+        
+    }
     
     //getOrders
+    public function getOrders($username){
+        $prepareStatement1 = "select * from users where username like '$username'";
+        $stmt = $this->DB->prepare($prepareStatement1);
+        $stmt->execute();
+        $arr = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+        $prepareStatement2 = "select * from orders where user_id = {$arr[0]['id']}";
+        
+        $stmt = $this->DB->prepare($prepareStatement2);
+        $stmt->execute();
+        $cart = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+        return $cart;
+    }
     
-    //checkout
+    //checkout sends the cart to the list of all orders
+    public function checkout($username){
+        
+        $prepareStatement1 = "select * from users where username like '$username'";
+        $stmt = $this->DB->prepare($prepareStatement1);
+        $stmt->execute();
+        $arr = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+        $prepareStatement2 = "select * from carts where id = {$arr[0]['cart_id']}";
+        $stmt = $this->DB->prepare($prepareStatement2);
+        $stmt->execute();
+        $cart = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+        foreach($cart as $item){
+            
+            $prepareStatement3 = "insert into orders(           id,           user_id,             product_id,            quantity,              date)"
+                                            ."values({$item['id']},   {$arr[0]['id']},  {$item['product_id']}, {$item['quantity']}, CURRENT_TIMESTAMP)";
+            $stmt = $this->DB->prepare($prepareStatement3);
+            $stmt->execute();
+            
+        }
+        
+        $this->removeCart($username);
+    }
     
     //removeCart
+    //Remove all item in users cart
+    public function removeCart($username){
     
+        $prepareStatement1 = "select * from users where username like '$username'";
+        $stmt = $this->DB->prepare($prepareStatement1);
+        $stmt->execute();
+        $arr = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+        $prepareStatement2 = "delete from carts where id = {$arr[0]['cart_id']}";
+        
+        $stmt = $this->DB->prepare($prepareStatement2);
+        $stmt->execute();
+        
+    }
     
     //New cart
     //Due to some problemsm, I decided to get the next cart number this way, instead of using max in sql
@@ -92,3 +206,7 @@ class DatabaseAdaptor {
 }
 
 $theDBA = new DatabaseAdaptor();
+
+$theDBA->addToCart('feg', 10001, 99);
+
+?>
