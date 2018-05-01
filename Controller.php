@@ -9,7 +9,28 @@ unset($_SESSION['RegisterFailed'] );
  * Basic search
  */
 if(isset($_GET['search'])){
-    $array = $theDBA->search($_GET["search"]);
+    
+    $arrayName = $theDBA->searchByString($_GET["search"]);
+    
+    if(isset($_GET['max_price']) && isset($_GET['min_price']))
+        $arrayPrice = $theDBA->searchByPrice($_GET["min_price"], $_GET["max_price"]);
+        
+    if(isset($_GET['category'])){
+        
+        if($_GET['category'] === 'All')
+            $arrayCate = $theDBA->searchByCategory("All");
+        else
+            $arrayCate = $theDBA->searchByCategory($_GET["category"]);
+    }
+    
+    $array = array();
+    
+    //merge 3 arrys
+    foreach($arrayName as $e){
+        if(in_array($e, $arrayPrice) && in_array($e, $arrayCate))
+            array_push($array, $e);
+    }
+        
     $toReturn ="<h2> Search Results: </h2><br><br>";
     
     for($i = 0; $i < count($array); $i++){

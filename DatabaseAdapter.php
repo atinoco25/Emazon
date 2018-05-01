@@ -60,7 +60,11 @@ class DatabaseAdaptor {
     
     //searchByCatagory
     public function searchByCategory($category){
-        $prepareStatement = "select * from products where category like '$category'";
+        if($category === 'All')
+            $prepareStatement = "select * from products";
+        else
+            $prepareStatement = "select * from products where category like '$category'";
+        
         $stmt = $this->DB->prepare($prepareStatement);
         $stmt->execute();
         $arr = $stmt->fetchAll ( PDO::FETCH_ASSOC );
@@ -206,6 +210,5 @@ class DatabaseAdaptor {
 }
 
 $theDBA = new DatabaseAdaptor();
-
 
 ?>
