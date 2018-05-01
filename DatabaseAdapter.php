@@ -58,6 +58,18 @@ class DatabaseAdaptor {
         return $arr;
     }
     
+    //getProductById
+    public function getProductById($id){
+        
+        $prepareStatement = "select * from products where id = $id";
+        $stmt = $this->DB->prepare($prepareStatement);
+        $stmt->execute();
+        $arr = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+        return $arr;
+    }
+    
+    
     //searchByCatagory
     public function searchByCategory($category){
         if($category === 'All')
@@ -210,5 +222,4 @@ class DatabaseAdaptor {
 }
 
 $theDBA = new DatabaseAdaptor();
-
 ?>

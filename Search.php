@@ -12,11 +12,54 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  
   <link rel="stylesheet" type="text/css" href="style.css">
 <title>Search Page</title>
 </head>
 <body>
+<script>
+
+function gosearch(){
+
+	var elementToChange = document.getElementById("toChange");
+	var ajax = new XMLHttpRequest();
+	var textToSearch = 
+	<?php 
+	if(!isset($_POST["toSearch"]))
+	    echo json_encode("");
+	else
+	   echo json_encode($_POST["toSearch"]); ?>;
+	var min = document.getElementById("price-min").value;
+	var max = document.getElementById("price-max").value;
+	var category = document.getElementById("category");
+	var selected = category.options[category.selectedIndex].value
+	
+	ajax.open("GET", "Controller.php?search=" + textToSearch
+							   + "&min_price=" + min
+							   + "&max_price=" + max
+							   +  "&category=" + selected
+							   , true);
+
+	ajax.send();
+	ajax.onreadystatechange = function() {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			var products = JSON.parse(ajax.responseText);
+			elementToChange.innerHTML = products;
+		}
+	}; // End anonymous function
+}
+
+function addToCart(itemID){
+	var ajax = new XMLHttpRequest();
+	var quan = document.getElementById(itemID).value;
+	ajax.open("GET", "Controller.php?addToCart=True"
+							   + "&id=" 	  + itemID
+							   + "&quantity=" + quan
+							   , true);
+
+	ajax.send();
+}
+</script>
 
 <?php 
 session_start();
@@ -71,36 +114,15 @@ session_start();
 
 <div id="toChange"></div>
 
+<script>
+gosearch();
+gosearch();
+</script>
+
+
 <footer class="myFooter">
 <p>Emazon @Copyright 2018 By Alexis Tinoco and Chun Wu</p>
 </footer>
 
-<script >
-gosearch();
-
-function gosearch(){
-	var elementToChange = document.getElementById("toChange");
-	var ajax = new XMLHttpRequest();
-	var textToSearch = <?php echo json_encode($_POST["toSearch"]); ?>;
-	var min = document.getElementById("price-min").value;
-	var max = document.getElementById("price-max").value;
-	var category = document.getElementById("category");
-	var selected = category.options[category.selectedIndex].value
-	
-	ajax.open("GET", "Controller.php?search=" + textToSearch
-							   + "&min_price=" + min
-							   + "&max_price=" + max
-							   +  "&category=" + selected
-							   , true);
-
-	ajax.send();
-	ajax.onreadystatechange = function() {
-		if (ajax.readyState == 4 && ajax.status == 200) {
-			var products = JSON.parse(ajax.responseText);
-			elementToChange.innerHTML = products;
-		}
-	}; // End anonymous function
-}
-</script>
 </body>
 </html>

@@ -37,11 +37,48 @@ if(isset($_GET['search'])){
         $toReturn .= "<div class='product'>";
         $toReturn .= "<h3>".$array[$i]["name"]."</h3> <p>-".$array[$i]["category"]."</p>";
         $toReturn .= "<p>".$array[$i]["description"]."</p>";
-        $toReturn .= "Price: " . $array[$i]["price"] . "&nbsp&nbsp&nbsp<button>Add to order</button>&nbsp";
-        $toReturn .= "<input type='number' min='1' max='9' value='1' maxlength='1' size='2'>";
+        $toReturn .= "Price: " . $array[$i]["price"] . "&nbsp&nbsp&nbsp" . 
+                     "<button onclick='addToCart({$array[$i]["id"]})'>Add to Cart</button>&nbsp";
+        $toReturn .= "<input type='number' id='{$array[$i]["id"]}' min='1' max='9' value='1' maxlength='1' size='2'>";
         $toReturn .= "</div><br>";
     }
+
+    
     echo json_encode($toReturn);
+}
+
+/*
+ * Get current user's cart
+ */
+
+if(isset($_GET['getCart']) && isset($_SESSION['user'])){
+    
+    $array = $theDBA->getCart($_SESSION['user']);
+    
+    if(empty($array)){
+        $toReturn ="<h2> Cart: EMPTY </h2><br>";
+    }else{
+        $toReturn ="<h2> Cart: </h2><br><br>";
+        for($i = 0; $i < count($array); $i++){
+            
+            $product = $theDBA->getProductById($array[$i]['product_id']);
+            
+            $toReturn .= "<div class='product'>";
+            $toReturn .= "<h3>".$product[0]["name"]."</h3> <p>-".$product[0]["category"]."</p>";
+            $toReturn .= "<p>".$product[0]["description"]."</p>";
+            $toReturn .= "Price: " . $product[0]["price"] . "<br>";
+            $toReturn .= "<p> Quantity: &nbsp {$array[$i]['quantity']} </p>";
+            $toReturn .= "</div><br>";
+        }
+    }
+    echo json_encode($toReturn);
+}
+
+/*
+ * Add item to cart
+ */
+if(isset($_GET['addToCart']) && isset($_SESSION['user'])){
+    $theDBA->addToCart($_SESSION['user'], $_GET['id'], $_GET['quantity']);
 }
 
 /*
