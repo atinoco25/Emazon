@@ -27,7 +27,7 @@ session_start();
         <div class="row">
             <div class="col"> <a class="logo" href="index.php">Emazon</a></div>
             <div class="col" style="text-align:center;margin:auto;">
-            	<form action="search.php" method="POST">
+            	<form action="search.php" method="POST" data-ajax="false">
             		<input type="text" name="toSearch" placeholder="Enter product">
             		<button type="submit" class="btn btn-dark" name="search" value="Search">Search</button>
             	</form>
@@ -35,14 +35,14 @@ session_start();
             <div class="col" style="text-align:right;margin:auto;">
             <?php 
             if(isset($_SESSION["user"])){
-                echo '<a href="cart.php" class="btn btn-dark" role="button">Cart</a>';
+                echo '<a href="cart.php" class="btn btn-dark" role="button" data-ajax="false">Cart</a>';
                 echo '&nbsp';
-                echo '<a href="logout.php" class="btn btn-dark" role="button">Logout</a>';
+                echo '<a href="logout.php" class="btn btn-dark" role="button" data-ajax="false">Logout</a>';
             }
             else{
-                echo '<a href="login.php" class="btn btn-dark" role="button">Login</a>';
+                echo '<a href="login.php" class="btn btn-dark" role="button" data-ajax="false">Login</a>';
                 echo '&nbsp';
-                echo '<a href="register.php" class="btn btn-dark" role="button">Register</a>';
+                echo '<a href="register.php" class="btn btn-dark" role="button" data-ajax="false">Register</a>';
             }
             ?>
             <a href="index.php" class="btn btn-dark" role="button">Home</a>

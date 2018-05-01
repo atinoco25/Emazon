@@ -76,14 +76,14 @@ session_start();
             <div class="col" style="text-align:right;margin:auto;">
                 <?php 
                 if(isset($_SESSION["user"])){
-                    echo '<a href="cart.php" class="btn btn-dark" role="button">Cart</a>';
+                    echo '<a href="cart.php" class="btn btn-dark" role="button" data-ajax="false">Cart</a>';
                     echo '&nbsp';
-                    echo '<a href="logout.php" class="btn btn-dark" role="button">Logout</a>';
+                    echo '<a href="logout.php" class="btn btn-dark" role="button" data-ajax="false">Logout</a>';
                 }
                 else{
-                    echo '<a href="login.php" class="btn btn-dark" role="button">Login</a>';
+                    echo '<a href="login.php" class="btn btn-dark" role="button" data-ajax="false">Login</a>';
                     echo '&nbsp';
-                    echo '<a href="register.php" class="btn btn-dark" role="button">Register</a>';
+                    echo '<a href="register.php" class="btn btn-dark" role="button" data-ajax="false">Register</a>';
                 }
                 ?>	
             	<a href="index.php" class="btn btn-dark" role="button">Home</a>
@@ -114,7 +114,7 @@ session_start();
 
 <div id="toChange"></div>
 
-<script>
+<script >
 gosearch();
 gosearch();
 </script>

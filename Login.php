@@ -28,7 +28,7 @@ session_start();
         <div class="row">
             <div class="col"> <a class="logo" href="index.php">Emazon</a> </div>
             <div class="col" style="text-align:center;margin:auto;">
-            	<form action="search.php" method="POST">
+            	<form action="search.php" method="POST" data-ajax="false">
             		<input type="text" name="toSearch" placeholder="Enter product">
             		<button type="submit" class="btn btn-dark" name="search" value="Search">Search</button>
             	</form>
