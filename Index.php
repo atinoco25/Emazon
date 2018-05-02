@@ -89,7 +89,7 @@ session_start();
               </div>
             </div>
             <div class="carousel-item">
-              <img src="img/chipsSnacks.jpg" width="500px" height="300px">
+              <img src="img/chips.jpg" width="500px" height="300px">
               <div class="carousel-caption">
                   <h3>Chips!</h3>
                   <p>Get all these chips for only $6.99!</p>
