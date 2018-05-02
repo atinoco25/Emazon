@@ -84,7 +84,7 @@ if (isset($_GET["userOrders"])) {
         $toReturn .= "<div><b>Products:</b><br>";
         while($i < count($arr) && $currentOrderId === $arr[$i]["id"]){
             $product = $theDBA->getProductById( $arr[$i]["product_id"]);
-            $toReturn .= "<b>Name: </b> <a href='product.php?product=".$product[0]["name"]."' data-ajax='false'>" . $product[0]["name"]."</a>&nbsp&nbsp&nbsp".
+            $toReturn .= "&nbsp&nbsp&nbsp&nbsp<b>Name: </b> <a href='product.php?product=".$product[0]["name"]."' data-ajax='false'>" . $product[0]["name"]."</a>&nbsp&nbsp&nbsp".
                          "<b>Value: </b> ". $product[0]["price"] . "&nbsp&nbsp&nbsp".
                          "<b>Quantity: </b> " . $arr[$i]["quantity"] . "<br>";
             $i++;
