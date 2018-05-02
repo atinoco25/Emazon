@@ -216,9 +216,14 @@ class DatabaseAdaptor {
         return false;
     }
     
-    
-    
-    
+    //get a single product with the given name
+    public function getProduct($name){
+        $stmt = $this->DB->prepare( 'SELECT * FROM products WHERE name="' . $name.'"');
+        $stmt->execute ();
+        $arr = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+        return $arr;
+    }
 }
 
 $theDBA = new DatabaseAdaptor();
