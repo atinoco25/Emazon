@@ -184,6 +184,16 @@ class DatabaseAdaptor {
         $this->removeCart($username);
     }
     
+    //give a new cart number to the user
+    public function giveNewCart($username){
+        
+        $newCartID = $this->getNewCart();
+        $prepareStatement = "update users set cart_id = $newCartID where username like '$username'";
+        $stmt = $this->DB->prepare($prepareStatement);
+        $stmt->execute();
+        
+    }
+    
     //removeCart
     //Remove all item in users cart
     public function removeCart($username){

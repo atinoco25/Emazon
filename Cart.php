@@ -48,11 +48,20 @@ function removeItem(prod_id){
 	getCart();	
 }
 
+function checkout(){
+
+	var ajax = new XMLHttpRequest();
+	ajax.open("GET", "Controller.php?checkout=True", true);
+	ajax.send();
+	getCart();	
+}
+
 </script>
 
 
 
 <?php 
+include "DatabaseAdapter.php";
 session_start();
 ?>
 
@@ -68,6 +77,11 @@ session_start();
             	</form>
             </div>
             <div class="col" style="text-align:right;margin:auto;">
+            <?php 
+                if(isset($_SESSION['user']) && !empty($theDBA->getCart($_SESSION['user'])))
+                   echo '<a href="payment.php" class="btn btn-dark" role="button" onclick="checkout()">Checkout</a>';
+            ?>
+           	 	
             	<a href="index.php" class="btn btn-dark" role="button">Home</a>
             </div>
         </div>

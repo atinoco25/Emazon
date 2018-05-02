@@ -102,6 +102,17 @@ if(isset($_GET['removeFromCart']) && isset($_SESSION['user'])){
 }
 
 /*
+ * checkout
+ */
+if(isset($_GET['checkout'])&& isset($_SESSION['user'])){
+    
+    $theDBA->checkout($_SESSION['user']);
+    $theDBA->giveNewCart($_SESSION['user']);
+    
+}
+
+
+/*
  * Add item to cart
  */
 if(isset($_GET['addToCart']) && isset($_SESSION['user'])){
