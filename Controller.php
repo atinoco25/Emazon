@@ -78,6 +78,7 @@ if (isset($_GET["userOrders"])) {
         $currentOrderId = $arr[$i]["id"];
         $toReturn .= "<div><b>Order #: </b> " . $arr[$i]["id"] . "</div>";
         $toReturn .= "<div><b>Date: </b> " . $arr[$i]["date"] . "</div>";
+        $orderTotal =  $theDBA->getOrderTotal($arr[$i]["id"]);
         
         $toReturn .= "<div><b>Products:</b><br>";
         while($i < count($arr) && $currentOrderId === $arr[$i]["id"]){
@@ -89,7 +90,7 @@ if (isset($_GET["userOrders"])) {
         }
         $toReturn .= "</div>";
         $toReturn .= "---------------------<br>";
-        $toReturn .= "<div><b>Total: </b> TBD </div><br>";
+        $toReturn .= "<div><b>Total: </b>" . $orderTotal. "</div><br>";
         $toReturn .= "<hr>";
     }
     
@@ -120,6 +121,11 @@ if (isset($_GET['getCart']) && isset($_SESSION['user'])) {
             $toReturn .= "</div><br>";
         }
     }
+    
+    $cartTotal = $theDBA->getCartTotal($_SESSION['user']);
+    $toReturn .= "<div class='cartTotal'><h3>Total:".$cartTotal . "<br><br><br></h3></div>";
+    
+    
     echo json_encode($toReturn);
 }
 

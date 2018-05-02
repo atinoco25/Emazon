@@ -34,8 +34,8 @@ session_start();
             	</form>
             </div>
             <div class="col" style="text-align:right;margin:auto;">
-                 <a href="cart.php" class="btn btn-dark" role="button">Cart</a>
-            	 <a href="index.php" class="btn btn-dark" role="button">Home</a>
+                 <a href="cart.php" class="btn btn-dark" role="button" data-ajax="false">Cart</a>
+            	 <a href="index.php" class="btn btn-dark" role="button" data-ajax="false">Home</a>
             </div>
         </div>
     </div>

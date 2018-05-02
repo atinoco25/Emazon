@@ -260,8 +260,39 @@ class DatabaseAdaptor {
         
         return $arr;
     }
+    
+    //get the total price of an order
+    public function getOrderTotal($orderId){
+        $stmt = $this->DB->prepare( 'SELECT * FROM orders WHERE id="' . $orderId.'"');
+        $stmt->execute ();
+        $arr = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+        $total = 0;
+        for($i = 0; $i < count($arr); $i++){
+            $product = $this->getProductById($arr[$i]["product_id"]);
+            $total = $product[0]["price"] * $arr[$i]["quantity"] + $total;
+        }
+        
+        return $total;
+    }
+    
+    //get the total price of an order
+    public function getCartTotal($user){
+        $userId = $this->getCart($user);
+        
+        $stmt = $this->DB->prepare('SELECT * FROM carts WHERE id="' . $userId[0]["id"] . '"');
+        $stmt->execute();
+        $arr = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        $total = 0;
+        for ($i = 0; $i < count($arr); $i ++) {
+            $product = $this->getProductById($arr[$i]["product_id"]);
+            $total = $product[0]["price"] * $arr[$i]["quantity"] + $total;
+         }
+        
+        return $total;
+    }
 }
 
 $theDBA = new DatabaseAdaptor();
-
 ?>
