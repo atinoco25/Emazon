@@ -66,8 +66,10 @@ session_start();
 
 	<?php
 	
-	if( isset(  $_SESSION['RegisterFailed']))
+	if( isset(  $_SESSION['RegisterFailed'])){
 	    echo   $_SESSION['RegisterFailed']; 
+	    unset($_SESSION['RegisterFailed']);
+	}
     
 	?>
 </div>

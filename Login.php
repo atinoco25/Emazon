@@ -65,8 +65,10 @@ session_start();
 
 	<?php
 	
-	if( isset(  $_SESSION['LoginFailed']))
+	if( isset(  $_SESSION['LoginFailed'])){
 	    echo   $_SESSION['LoginFailed'];   
+	    unset($_SESSION['LoginFailed']);
+	}
     
 	?>
 </div>
