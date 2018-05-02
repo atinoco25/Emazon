@@ -116,8 +116,9 @@ class DatabaseAdaptor {
         $stmt->execute();
         $item = $stmt->fetchAll ( PDO::FETCH_ASSOC );
         
-        $prepareStatement3 = "select * from carts where id = {$user[0]['cart_id']} AND "
-                                              ."product_id = {$product_id}";
+        $prepareStatement3 = "select * from carts " .
+                             "join users on carts.id = users.cart_id " .
+                             "where product_id = {$product_id} AND username like '$username'";
         $stmt = $this->DB->prepare($prepareStatement3);
         $stmt->execute();
         $exist = $stmt->fetchAll ( PDO::FETCH_ASSOC );
