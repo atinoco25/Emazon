@@ -55,11 +55,11 @@ session_start();
 	<form action="controller.php" method="POST">
       	<div class="form-group">
             <label for="username">Username:</label>
-            <input type="text" class="form-control" placeholder="Enter username" name="newUsername">
+            <input type="text" class="form-control" placeholder="Enter username" name="newUsername" title="Username needs to be at least 4 characters" pattern=".{4,}" required>
       	</div>
       	<div class="form-group">
             <label for="pwd">Password:</label>
-            <input type="password" class="form-control" placeholder="Enter password" name="newPassword">
+            <input type="password" class="form-control" placeholder="Enter password" name="newPassword" title="Password needs to be at least 6 characters" pattern=".{6,}" required>
      	</div>
       		<button type="submit" class="btn btn-primary" name="register" value="Register">Register</button>
 	</form>

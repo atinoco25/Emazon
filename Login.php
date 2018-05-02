@@ -54,11 +54,11 @@ session_start();
 	<form action="controller.php" method="POST">
   	<div class="form-group">
     <label for="username">Username:</label>
-    <input type="text" class="form-control" placeholder="Enter username" name="username">
+    <input type="text" class="form-control" placeholder="Enter username" name="username" required>
   	</div>
   	<div class="form-group">
     <label for="pwd">Password:</label>
-    <input type="password" class="form-control" placeholder="Enter password" name="password">
+    <input type="password" class="form-control" placeholder="Enter password" name="password" required>
  	</div>
   	<button type="submit" class="btn btn-primary" name="login" value="Login">Login</button>
 	</form>
