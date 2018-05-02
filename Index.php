@@ -35,6 +35,8 @@ session_start();
             <div class="col" style="text-align:right;margin:auto;">
             <?php 
             if(isset($_SESSION["user"])){
+                echo '<a href="UserOrders.php" class="btn btn-dark" role="button" data-ajax="false">Order History</a>';
+                echo '&nbsp';
                 echo '<a href="cart.php" class="btn btn-dark" role="button" data-ajax="false">Cart</a>';
                 echo '&nbsp';
                 echo '<a href="logout.php" class="btn btn-dark" role="button" data-ajax="false">Logout</a>';
