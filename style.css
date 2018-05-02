@@ -34,6 +34,11 @@ body{
 .product{
 	border: solid;
 }
+.productImg{
+	float: left;
+	width : 300px;
+	height: 200px;
+}
 .myFooter{
 	position: absolute;
 	bottom: 0;

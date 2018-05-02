@@ -53,9 +53,10 @@ if(isset($_GET['search'])){
 if(isset($_GET["product"])){
     $arr = $theDBA->getProduct($_GET["product"]);
     
-    $toReturn = "<h1>".$arr[0]["name"]."</h1>";
-    $toReturn .= "<div style='float:right;'>".$arr[0]["description"] ."<br>";
-    $toReturn .= "Price: " . $arr[0]["price"] . "&nbsp&nbsp&nbsp" .
+    $toReturn = "<h1>".$arr[0]["name"]."</h1><br>";
+    $toReturn .= "<img class='productImg' src='img/".$_GET["product"]. ".jpg' alt='Product Image'>";
+    $toReturn .= "<div style='float:right;'><b>". $arr[0]["category"] . "</b><br><br>" .$arr[0]["description"] ."<br><br>";
+    $toReturn .= "Price: " . $arr[0]["price"] . "<br>" .
         "<button onclick='addToCart({$arr[0]["id"]})'>Add to Cart</button>&nbsp";
     $toReturn .= "<input type='number' id='{$arr[0]["id"]}' min='1' max='9' value='1' maxlength='1' size='2'>";
     $toReturn .= "</div>";

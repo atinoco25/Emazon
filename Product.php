@@ -58,8 +58,8 @@ session_start();
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-3"></div>
-<div class="col-sm-6">
-<div class="containerForm" style="height: 300px;">
+<div class="col-sm-5">
+<div class="containerForm" style="height: 400px;">
 	<div id="toChange"></div>
 </div></div></div></div>
 <!-- Product code ends -->
