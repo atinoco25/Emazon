@@ -54,7 +54,7 @@ if (isset($_GET["product"])) {
     
     $toReturn = "<h1>" . $arr[0]["name"] . "</h1><br>";
     $toReturn .= "<img class='productImg' src='img/" . $_GET["product"] . ".jpg' alt='Product Image'>";
-    $toReturn .= "<div style='float:right;'><b>" . $arr[0]["category"] . "</b><br><br>" . $arr[0]["description"] . "<br><br>";
+    $toReturn .= "<div style='float:right;'><b>" . $arr[0]["category"] . "</b><br><br><div class='description'>" . $arr[0]["description"] . "</div><br><br>";
     $toReturn .= "Price: " . $arr[0]["price"] . "<br>" . "<button onclick='addToCart({$arr[0]["id"]})'>Add to Cart</button>&nbsp";
     $toReturn .= "<input type='number' id='{$arr[0]["id"]}' min='1' max='9' value='1' maxlength='1' size='2'>";
     $toReturn .= "</div>";
