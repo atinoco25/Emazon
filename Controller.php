@@ -66,7 +66,7 @@ if (isset($_GET["product"])) {
  *
  */
 if (isset($_GET["userOrders"])) {
-    $arr = $theDBA->getOrders("alexis");
+    $arr = $theDBA->getOrders($_SESSION['user']);
     
     $toReturn = "";
     

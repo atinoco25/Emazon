@@ -109,9 +109,9 @@ session_start();
 <div class="searchOptions">
     <div data-role="rangeslider">
         <label for="price-min">Price:</label>
-        <input type="range" name="price-min" id="price-min" value="0" min="0" max="150">
+        <input type="range" name="price-min" id="price-min" value="0" min="0" max="30">
         <label for="price-max">Price:</label>
-        <input type="range" name="price-max" id="price-max" value="150" min="0" max="150">
+        <input type="range" name="price-max" id="price-max" value="30" min="0" max="30">
     </div>
     <label for="category">Category</label>
     <select id="category">

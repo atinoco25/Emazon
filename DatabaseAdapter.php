@@ -37,6 +37,7 @@ class DatabaseAdaptor {
     
     //searchByName
     public function searchByString($toSearch){
+        $toSearch = htmlspecialchars($toSearch); 
         $array = explode(" ", $toSearch);
         $prepareStatement = "select * from products where name like '%" . $array[0] . "%' or description like '%" . $array[0] . "%' ";
         for($i = 1; $i < count($array); $i++){
@@ -50,8 +51,10 @@ class DatabaseAdaptor {
     }
     //searchByPrice
     public function searchByPrice($min, $max){
-        $prepareStatement = "select * from products where price >= $min AND price <= $max";
+        $prepareStatement = "select * from products where price >= :min AND price <= :max";
         $stmt = $this->DB->prepare($prepareStatement);
+        $stmt->bindParam ( 'min', $min );
+        $stmt->bindParam ( 'max', $max );
         $stmt->execute();
         $arr = $stmt->fetchAll ( PDO::FETCH_ASSOC );
         
@@ -61,8 +64,9 @@ class DatabaseAdaptor {
     //getProductById
     public function getProductById($id){
         
-        $prepareStatement = "select * from products where id = $id";
+        $prepareStatement = "select * from products where id = :id";
         $stmt = $this->DB->prepare($prepareStatement);
+        $stmt->bindParam ( 'id', $id );
         $stmt->execute();
         $arr = $stmt->fetchAll ( PDO::FETCH_ASSOC );
         
@@ -75,9 +79,10 @@ class DatabaseAdaptor {
         if($category === 'All')
             $prepareStatement = "select * from products";
         else
-            $prepareStatement = "select * from products where category like '$category'";
+            $prepareStatement = "select * from products where category like :category";
         
         $stmt = $this->DB->prepare($prepareStatement);
+        $stmt->bindParam ( 'category', $category );
         $stmt->execute();
         $arr = $stmt->fetchAll ( PDO::FETCH_ASSOC );
         
@@ -86,8 +91,9 @@ class DatabaseAdaptor {
     
     //getCart
     public function getCart($username){
-        $prepareStatement1 = "select * from users where username like '$username'";
+        $prepareStatement1 = "select * from users where username like :username";
         $stmt = $this->DB->prepare($prepareStatement1);
+        $stmt->bindParam ( 'username', $username );
         $stmt->execute();
         $arr = $stmt->fetchAll ( PDO::FETCH_ASSOC );
         
@@ -221,7 +227,10 @@ class DatabaseAdaptor {
     
     //addUser- This function will add a username if the username is not in the database
     public function addUser($username, $password){
-        $stmt = $this->DB->prepare( "SELECT * FROM users WHERE username = '" . $username ."'");
+        $username = htmlspecialchars($username); 
+        $password = htmlspecialchars($password); 
+        $stmt = $this->DB->prepare( "SELECT * FROM users WHERE username like :username");
+        $stmt->bindParam ( 'username', $username );
         $stmt->execute ();
         $arr = $stmt->fetchAll ( PDO::FETCH_ASSOC );
         
@@ -239,8 +248,11 @@ class DatabaseAdaptor {
     }
     
     //verifyUser-> this function will return true if he password matches the user, otherwise if not
-    public function verifyCredentials($userName, $psw){
-        $stmt = $this->DB->prepare( 'SELECT * FROM users WHERE username="' . $userName.'"');
+    public function verifyCredentials($username, $psw){
+        $username = htmlspecialchars($username);
+        $psw = htmlspecialchars($psw); 
+        $stmt = $this->DB->prepare( "SELECT * FROM users WHERE username like :username");
+        $stmt->bindParam ( 'username', $username );
         $stmt->execute ();
         $arr = $stmt->fetchAll ( PDO::FETCH_ASSOC );
         
@@ -278,8 +290,12 @@ class DatabaseAdaptor {
     
     //get the total price of an order
     public function getCartTotal($user){
+        
         $userId = $this->getCart($user);
         
+        if(empty($userId))
+            return 0;
+            
         $stmt = $this->DB->prepare('SELECT * FROM carts WHERE id="' . $userId[0]["id"] . '"');
         $stmt->execute();
         $arr = $stmt->fetchAll(PDO::FETCH_ASSOC);

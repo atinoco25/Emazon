@@ -21,13 +21,10 @@
 </head>
 <body>
 <script>
-
 function getCart(){
 	var elementToChange = document.getElementById("toChange");
 	var ajax = new XMLHttpRequest();
-
 	ajax.open("GET", "Controller.php?getCart=True", true);
-
 	ajax.send();
 	ajax.onreadystatechange = function() {
 		if (ajax.readyState == 4 && ajax.status == 200) {
@@ -36,26 +33,21 @@ function getCart(){
 		}
 	}; // End anonymous function
 }
-
 function removeItem(prod_id){
 	
 	var ajax = new XMLHttpRequest();
-
 	ajax.open("GET", "Controller.php?removeFromCart=True"
 			   							+ "&prod_id=" + prod_id
  											, true);
 	ajax.send();
 	getCart();	
 }
-
 function checkout(){
-
 	var ajax = new XMLHttpRequest();
 	ajax.open("GET", "Controller.php?checkout=True", true);
 	ajax.send();
 	getCart();	
 }
-
 </script>
 
 
