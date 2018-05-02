@@ -82,11 +82,22 @@ if(isset($_GET['getCart']) && isset($_SESSION['user'])){
             $toReturn .= "<h3>".$product[0]["name"]."</h3> <p>-".$product[0]["category"]."</p>";
             $toReturn .= "<p>".$product[0]["description"]."</p>";
             $toReturn .= "Price: " . $product[0]["price"] . "<br>";
-            $toReturn .= "<p> Quantity: &nbsp {$array[$i]['quantity']} </p>";
+            $toReturn .= "<p> Quantity: &nbsp {$array[$i]['quantity']} </p>&nbsp&nbsp&nbsp";
+            $toReturn .= "<button onclick='removeItem({$product[0]["id"]})'>Remove</button>&nbsp";
             $toReturn .= "</div><br>";
         }
     }
     echo json_encode($toReturn);
+}
+
+/*
+ * remove item
+ */
+
+if(isset($_GET['removeFromCart']) && isset($_SESSION['user'])){
+    
+    $theDBA->removeFromCart($_SESSION['user'], $_GET['prod_id']);
+    
 }
 
 /*

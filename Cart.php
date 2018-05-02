@@ -36,6 +36,18 @@ function getCart(){
 		}
 	}; // End anonymous function
 }
+
+function removeItem(prod_id){
+	
+	var ajax = new XMLHttpRequest();
+
+	ajax.open("GET", "Controller.php?removeFromCart=True"
+			   							+ "&prod_id=" + prod_id
+ 											, true);
+	ajax.send();
+	getCart();	
+}
+
 </script>
 
 

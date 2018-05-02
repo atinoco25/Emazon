@@ -110,9 +110,35 @@ class DatabaseAdaptor {
         $stmt->execute();
         $item = $stmt->fetchAll ( PDO::FETCH_ASSOC );
         
-        $prepareStatement3 = "insert into carts(                   id,        product_id, quantity)"
-                                       ."values({$user[0]['cart_id']},  {$item[0]['id']},    $quan)";
+        $prepareStatement3 = "select * from carts where id = {$user[0]['cart_id']} AND "
+                                              ."product_id = {$product_id}";
         $stmt = $this->DB->prepare($prepareStatement3);
+        $stmt->execute();
+        $exist = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+        if(empty($exist)){
+            $prepareStatement4 = "insert into carts(                   id,        product_id, quantity)"
+                                           ."values({$user[0]['cart_id']},  {$item[0]['id']},    $quan)";
+            $stmt = $this->DB->prepare($prepareStatement4);
+            $stmt->execute();
+        }else{
+            $totalQ = $exist[0]['quantity'] + $quan;
+            $prepareStatement4 = "update carts set quantity = $totalQ " 
+                                ."where id = {$user[0]['cart_id']} AND product_id = {$product_id}";
+                $stmt = $this->DB->prepare($prepareStatement4);
+                $stmt->execute();
+        }
+    }
+    
+    //remove item from cart
+    public function removeFromCart($username, $product_id){
+        $prepareStatement1 = "select * from users where username like '$username'";
+        $stmt = $this->DB->prepare($prepareStatement1);
+        $stmt->execute();
+        $user = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+        $prepareStatement2 = "delete from carts where id = {$user[0]['cart_id']} AND product_id = $product_id";
+        $stmt = $this->DB->prepare($prepareStatement2);
         $stmt->execute();
         
     }
@@ -227,4 +253,5 @@ class DatabaseAdaptor {
 }
 
 $theDBA = new DatabaseAdaptor();
+
 ?>
