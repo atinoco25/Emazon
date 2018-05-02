@@ -93,6 +93,17 @@ function addToCart(itemID){
 							   , true);
 
 	ajax.send();
+	ajax.onreadystatechange = function() {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			var answer = JSON.parse(ajax.responseText);
+			if(answer == true){
+				alert("Added to cart!");
+			}
+			else{
+				alert("You need to log in first!");
+			}
+		}
+	}; // End anonymous function
 }
 drawProduct();
 </script>

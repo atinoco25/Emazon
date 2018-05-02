@@ -58,6 +58,17 @@ function addToCart(itemID){
 							   , true);
 
 	ajax.send();
+	ajax.onreadystatechange = function() {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			var answer = JSON.parse(ajax.responseText);
+			if(answer == true){
+				alert("Added to cart!");
+			}
+			else{
+				alert("You need to log in first!");
+			}
+		}
+	}; // End anonymous function
 }
 </script>
 
@@ -71,7 +82,10 @@ session_start();
         <div class="row">
             <div class="col"> <a class="logo" href="index.php">Emazon</a> </div>
             <div class="col" style="text-align:center;margin:auto;">
-            	<a href="search.php" class="btn btn-dark" role="button">Clear Search</a>
+            	<form action="search.php" method="POST" data-ajax="false">
+            		<input type="text" name="toSearch" placeholder="Enter product">
+            		<button type="submit" class="btn btn-dark" name="search" value="Search">New Search</button>
+            	</form>
             </div>
             <div class="col" style="text-align:right;margin:auto;">
                 <?php 

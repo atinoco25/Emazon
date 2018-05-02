@@ -41,6 +41,7 @@ if (isset($_GET['search'])) {
         $toReturn .= "<input type='number' id='{$array[$i]["id"]}' min='1' max='9' value='1' maxlength='1' size='2'>";
         $toReturn .= "</div><br>";
     }
+    $toReturn .= "<br><br>";
     
     echo json_encode($toReturn);
 }
@@ -83,14 +84,14 @@ if (isset($_GET["userOrders"])) {
         $toReturn .= "<div><b>Products:</b><br>";
         while($i < count($arr) && $currentOrderId === $arr[$i]["id"]){
             $product = $theDBA->getProductById( $arr[$i]["product_id"]);
-            $toReturn .= "<b>Name: </b> " . $product[0]["name"] . "&nbsp&nbsp&nbsp".
+            $toReturn .= "<b>Name: </b> <a href='product.php?product=".$product[0]["name"]."' data-ajax='false'>" . $product[0]["name"]."</a>&nbsp&nbsp&nbsp".
                          "<b>Value: </b> ". $product[0]["price"] . "&nbsp&nbsp&nbsp".
                          "<b>Quantity: </b> " . $arr[$i]["quantity"] . "<br>";
             $i++;
         }
         $toReturn .= "</div>";
         $toReturn .= "---------------------<br>";
-        $toReturn .= "<div><b>Total: </b>" . $orderTotal. "</div><br>";
+        $toReturn .= "<div><b>Total: </b>$" . $orderTotal. "</div><br>";
         $toReturn .= "<hr>";
     }
     
@@ -113,7 +114,8 @@ if (isset($_GET['getCart']) && isset($_SESSION['user'])) {
             $product = $theDBA->getProductById($array[$i]['product_id']);
             
             $toReturn .= "<div class='product'>";
-            $toReturn .= "<h3>" . $product[0]["name"] . "</h3> <p>-" . $product[0]["category"] . "</p>";
+            $toReturn .= "<h3><a href='product.php?product=".$product[0]["name"]."' data-ajax='false'>" . $product[0]["name"] . "</a></h3> <p>-" . 
+                          $product[0]["category"] . "</p>";
             $toReturn .= "<p>" . $product[0]["description"] . "</p>";
             $toReturn .= "Price: " . $product[0]["price"] . "<br>";
             $toReturn .= "<p> Quantity: &nbsp {$array[$i]['quantity']} </p>&nbsp&nbsp&nbsp";
@@ -152,8 +154,13 @@ if (isset($_GET['checkout']) && isset($_SESSION['user'])) {
  */
 if (isset($_GET['addToCart']) && isset($_SESSION['user'])) {
     $theDBA->addToCart($_SESSION['user'], $_GET['id'], $_GET['quantity']);
-    header('Location: cart.php');
+    
+    echo json_encode(true);
 }
+else if(isset($_GET['addToCart'])){
+    echo json_encode(false);
+}
+    
 /*
  * Registering a new user
  */
