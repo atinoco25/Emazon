@@ -100,7 +100,7 @@ session_start();
                     echo '<a href="register.php" class="btn btn-dark" role="button" data-ajax="false">Register</a>';
                 }
                 ?>	
-            	<a href="index.php" class="btn btn-dark" role="button">Home</a>
+            	<a href="index.php" class="btn btn-dark" role="button" data-ajax="false">Home</a>
             </div>
         </div>
     </div>

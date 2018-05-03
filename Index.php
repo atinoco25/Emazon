@@ -82,15 +82,16 @@ session_start();
           		</div>
             </div>
             <div class="carousel-item">
-              <img src="img/hammer.jpg" width="500px" height="300px" alt="Chicago">
+              <a href="product.php?product=hammer" data-ajax="false"><img src="img/hammer.jpg" width="500px" height="300px" alt="Chicago">
+              </a>
               <div class="carousel-caption">
                   <h3>Hammer</h3>
                   <p>Get a hammer for only $6.99!</p>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="img/chips.jpg" width="500px" height="300px">
-              <div class="carousel-caption">
+              <a href="product.php?product=chips" data-ajax="false"><img src="img/chips.jpg" width="500px" height="300px">
+              </a><div class="carousel-caption">
                   <h3>Chips!</h3>
                   <p>Get all these chips for only $6.99!</p>
               </div>
